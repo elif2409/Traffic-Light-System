@@ -1,0 +1,24 @@
+module clock_divider(
+input clk,
+input reset,
+output clk_divd
+);
+reg clk_divd;
+reg[100:0] count;
+always@(posedge clk)
+begin
+if(reset)
+count <= 0;
+if(count==150_000_000)
+count <=0;
+else
+count <= count+1;
+end
+always@(posedge clk)
+if(reset)
+clk_divd <= 0;
+else if(count==150_000_000)
+clk_divd <= ~clk_divd;
+else
+clk_divd <= clk_divd;
+endmodule
