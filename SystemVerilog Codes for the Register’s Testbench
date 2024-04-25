@@ -1,0 +1,26 @@
+module register_tb;
+reg sa;
+reg sb;
+reg clk;
+reg reset;
+wire la2;
+wire la1;
+wire la0;
+wire lb2;
+wire lb1;
+wire lb0;
+register_lab5 uut (.sa(sa), .sb(sb), .clk(clk), .reset(reset),
+.la2(la2), .la1(la1), .la0(la0), .lb2(lb2), .lb1(lb1), .lb0(lb0));
+always begin
+clk = 0; #5; clk=1; #5;
+end
+initial begin
+#5 sa=0; sb=0; reset=1;
+#5 sa=0; sb=0; reset=0;
+#20 sa=0; sb=1; reset=0;
+#20 sa=1; sb=0; reset=0;
+#20 sa=1; sb=1; reset=0;
+#20;
+$finish;
+end
+endmodule
